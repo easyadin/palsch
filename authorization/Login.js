@@ -1,16 +1,28 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import EasyTextInput from '../customComponents/textInput';
+import {Dimensions } from "react-native";
 
 
 export default class Login extends Component {
-    
+ 
+    constructor(){
+        super();
+        this.state = {screenWidth:Math.round(Dimensions.get('window').width)}
+    }
+
   render() {
     return (
         <View>
             <Text style={styles.logo}> Palsch </Text>
             <Text style={styles.signinText}> Signin to continue </Text>
-            <EasyTextInput />
+
+            <View style={{width:this.state.screenWidth,
+                          padding:30,
+                          }}>
+              <EasyTextInput />
+            </View>
+           
         </View>
       );
   }
@@ -30,7 +42,7 @@ const styles = StyleSheet.create({
     },
     signinText:{
         fontSize:17,
-        paddingLeft:22,
+        paddingLeft:27,
         marginTop:40,
         height:20,
         width:200,
