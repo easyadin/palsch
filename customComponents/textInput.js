@@ -2,34 +2,35 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, TextInput, Image } from 'react-native';
 
 export default class textInput extends Component {
-    constructor(){
+    constructor(props){
         super();
         this.state = {
-            usernameIcon_48px:require('../assets/user-3-line_48px.png'),
-            usernameIcon_24px:require('../assets/user-3-line_24px.png'),
-            passwordIcon:require('../assets/lock-unlock-line.png'),
             isFocused:false,
         }
-        onFocusChange = () =>{
-            this.setState({isFocused:true});
-            console.log(this.isFocused)
-        }
-    }
+     }
+    onFocus(){
+            this.setState({isFocused:true})     
+      }
+
     render(){
 
         //get the image or icon has prop
-        //scale it to right size
+        //pass the image || icon of 48px and 24px to the props
+        //pass the properties 
         return (
             <View style={styles.rectangle}>
                <View style={styles.container}>
-                    <Image source={this.state.isFocused ? this.state.usernameIcon_24px : this.state.usernameIcon_48px}>
+                    <Image source={this.state.isFocused ? this.props.icon24px : this.props.icon48px}>
                     </Image>
                     <View>
                         <Text>Username</Text>
                         <TextInput
-                           placeholder={"enter your username"}
+                           placeholder={this.props.placeholder}
                            autoCompleteType={'username'}
-                           onFocus={this.onFocusChange}>
+                           onFocus={ () => this.onFocus()}
+                           name={this.props.name}
+                           secureTextEntry={this.props.secureTextEntry}
+                           >
                         </TextInput>
                     </View>
                </View>
@@ -51,8 +52,4 @@ const styles = StyleSheet.create({
       flexDirection:'row',
       margin: 10,
     },
-    textStyle:{    
-
-    }
-
 });
